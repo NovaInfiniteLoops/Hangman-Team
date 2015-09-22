@@ -1,9 +1,16 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html ng-app ="game">
+=======
+<html>
+  <!--We need to add some comments TEST-->
+    <!-- Add more comments-->
+>>>>>>> 7c3e4f7f8b04cb25bee44068ec3a16fea01ef68a
 <head>
   <title>Villanova Hangman</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+<<<<<<< HEAD
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="Resources/hangman.css" >
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -26,6 +33,23 @@
         <span class="btn btn-info ng-class:{'hide': !l.visible}">{{l.letter}}</span>
         <span class="btn btn-info ng-class:{'hide': l.visible}">_</span>
       </span>
+=======
+  <link rel="stylesheet" type="text/css" href="Resources\bootstrap-3.3.5-dist\bootstrap-3.3.5-dist\css\bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="Resources/hangman.css" >
+  <script src="Resources\jquery\dist\jquery.min.js"></script>
+  <script src="Resources\bootstrap-3.3.5-dist\bootstrap-3.3.5-dist\js\bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="jumbotron">
+      <div class="col-md-2">Moves Left: ??</div><div class="col-md-9"></div><button id="reset" class="btn btn-info">Reset</button>
+    <h3 id="header">Infinite Loops Hangman  </h3>
+
+    <img class="col-xs-12" src="Resources\hangman.gif">
+    <span>
+        <span class="btn btn-info">H_LL_</span>
+>>>>>>> 7c3e4f7f8b04cb25bee44068ec3a16fea01ef68a
     </span>
   </div>
 </div>
@@ -35,13 +59,22 @@
     <div class="col-md-9">
       <h1> Choose a letter </h1>
         <span ng-repeat="letter in alphabet track by $index">
+<<<<<<< HEAD
           <button ng-click="clicked($index)" class="btn btn-info ng-class:{'hide': !letter.visible}">{{letter.letter}}</button>
+=======
+          <button class="btn btn-info">ABCDEFGIJKOMNPQRSTUVXYZ</button>
+>>>>>>> 7c3e4f7f8b04cb25bee44068ec3a16fea01ef68a
         </span>
     </div>
     <div class="col-md-3">
       <h1> Used letters </h1>
+<<<<<<< HEAD
       <span ng-repeat="letter in alphabet track by $index">
         <button class="btn btn-info ng-class:{'hide': letter.visible}">{{letter.letter}}</button>
+=======
+      <span>
+        <button class="btn btn-info">HL</button>
+>>>>>>> 7c3e4f7f8b04cb25bee44068ec3a16fea01ef68a
       </span>
     </div>
   </div>
