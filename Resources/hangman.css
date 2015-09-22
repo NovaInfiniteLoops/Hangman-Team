@@ -1,0 +1,22 @@
+<style>
+.glyphicon-unchecked {
+    font-size: 300%;
+}
+
+.hide {
+    font-family:"Webdings"
+}
+
+#reset {
+
+    padding: 20px;
+}
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+
+
+</style>

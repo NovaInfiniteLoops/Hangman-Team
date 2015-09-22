@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app ="game">
+<head>
+  <title>Villanova Hangman</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="Resources/hangman.css" >
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-ui/build/angular-ui.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script src="Resources/game.js"></script>
+</head>
+<body ng-controller="hangman">
+
+<div class="container">
+  <div class="jumbotron">
+      <div class="col-md-2">Moves Left: {{states.length-1-state}}</div><div class="col-md-9"></div><button id="reset" class="btn btn-info">Reset</button>
+    <h3 id="header">Infinite Loops Hangman  </h3>
+
+    <img class="col-xs-12" ng-src="{{states[state]}}">
+    <span>
+      <span ng-repeat="l in word track by $index">
+        <span class="btn btn-info ng-class:{'hide': !l.visible}">{{l.letter}}</span>
+        <span class="btn btn-info ng-class:{'hide': l.visible}">_</span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<hr>
+  <div class="row">
+    <div class="col-md-9">
+      <h1> Choose a letter </h1>
+        <span ng-repeat="letter in alphabet track by $index">
+          <button ng-click="clicked($index)" class="btn btn-info ng-class:{'hide': !letter.visible}">{{letter.letter}}</button>
+        </span>
+    </div>
+    <div class="col-md-3">
+      <h1> Used letters </h1>
+      <span ng-repeat="letter in alphabet track by $index">
+        <button class="btn btn-info ng-class:{'hide': letter.visible}">{{letter.letter}}</button>
+      </span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
