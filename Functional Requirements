@@ -1,0 +1,29 @@
+Hangman Game Requirements:
+
+The Hangman Game is a word puzzle game. It is mainly aimed at guessing alphabets in the process of guessing the word. 
+It has a limited number of such guesses and the user has to guess the word within that number. And with every wrong guess 
+the hangman image is updated and the player loses if the complete hangman image is reached.
+Here are our requirements of the game-
+
+UI Requirements:
+1. Menu (options)
+2. No. of players - 1 (LATER==>or 2(maintain scores) In the case of 2 players.. the players provide words for each other to guess).
+3. Difficulty levels - easy, medium, high
+4. word limitation - leave it to the team
+5. input: keyboard( on screen prefered)
+6. Categories - Animals, Geography, sports, movies, countries, food or simple words
+7. After the game ends.. display a message of win or lose.
+8. Play Again(y/n)?
+9. Help - How to play!
+
+Game Play requirements:
+1. Choose number of players
+2. Choose difficulty levels
+3. Choose category
+4. Display words based on category
+5. Display word characters as dashes(_ _ _ _ _ for black)
+5. When the player starts guessing, if the guessed letter belongs to the words then fill in the appropriate blanks. 
+   If the guess is wrong then highlight that alphabet in red(or blank/grey out) and update the hangman image
+   Hangman image - parts will be a head, body, 2 arms, 2 legs
+6. Once the player is out of the guesses then the hanging hangman image is displayed and a message is displayed ("Sorry! You Lose") else display the message "Congratulations! You Win"
+7. After the game ends.. display a choice of Play New Game. if the player chooses to play again then start a new game else end application
