@@ -1,5 +1,8 @@
 Hangman Game Requirements:
 
+//Initial Requirements received Sep 3,2015
+//Shrutika Reddy
+
 The Hangman Game is a word puzzle game. It is mainly aimed at guessing alphabets in the process of guessing the word. 
 It has a limited number of such guesses and the user has to guess the word within that number. And with every wrong guess 
 the hangman image is updated and the player loses if the complete hangman image is reached.
