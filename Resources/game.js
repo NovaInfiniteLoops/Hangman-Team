@@ -2,7 +2,7 @@ var app = angular.module('game', ['ui.bootstrap']);
   app.controller("hangman", ["$scope", function ($scope) {
     $scope.state = 0;
     $scope.word = [
-      //{letter: "H", visible: false},
+      {letter: "H", visible: false},
       {letter: "E", visible: false},
       {letter: "L", visible: false},
       {letter: "L", visible: false},
