@@ -8,14 +8,63 @@
 }
 
 #reset {
-
-    padding: 20px;
+    float:right;
+    clear:left;
+    padding: 10px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:normal;
 }
 #header {
-    background-color:black;
-    color:white;
-    text-align:center;
+    #background-color:black;
+    color:firebrick;
+    #text-align:center;
+    float:left;
+    margin: 0 0 0 5%;
     padding:5px;
+}
+#score {
+    float:right;
+    clear:left;
+    color:firebrick;
+    padding: 10px;
+}
+.btn-info {
+    background-color:white;
+    border-color:firebrick;
+    color:firebrick;
+    font-family:courier;
+    font-weight:bold;
+    margin-top:3px;
+    
+}
+.btn-letter{
+    border-style:none;
+    border-bottom-style:solid;
+    border-color:firebrick;
+    border-radius:0px;
+}
+.btn-concealed{
+    color:white
+}
+.jumbotron {
+    background-color:white;
+    padding:0px;
+    margin-top:30px;
+}
+.row {
+    padding-right:40px;
+    padding-left:40px;
+}
+hr {
+    background-color:firebrick;
+    border: 0;
+    width: 80%;
+    height: 3px;
+    
+}
+h1 {
+    color:firebrick;
+    font-size:20px;
 }
 
 
