@@ -8,6 +8,8 @@ It has a limited number of such guesses and the user has to guess the word withi
 the hangman image is updated and the player loses if the complete hangman image is reached.
 Here are our requirements of the game-
 
+//Note: Any requirements we add ourselves, tag them with who added them and when they are completed. Also this should be an excel sheet
+
 UI Requirements:
 1. Menu (options)
 2. No. of players - 1 (LATER==>or 2(maintain scores) In the case of 2 players.. the players provide words for each other to guess).
