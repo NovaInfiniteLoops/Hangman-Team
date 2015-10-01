@@ -20,7 +20,7 @@
 <div class="container">
   <div class="jumbotron">
 
-     <button id="reset" onClick="location.reload()" class="btn btn-info">Reset</button>
+     <button id="reset" ng-click="resetGame()" class="btn btn-info">Reset</button>
     <h3 id="header">Infinite Loops Hangman  </h3>
       <hr>
 
@@ -30,7 +30,7 @@
         <span>
           <span ng-repeat="l in word track by $index">
             <span class="btn btn-info btn-letter ng-class:{'hide': !l.visible}">{{l.letter}}</span>
-            <span class="btn btn-info btn-letter btn-concealed ng-class:{'hide': l.visible}">_</span>
+            <span class="btn btn-info btn-letter ng-class:{'hide': l.visible}">_</span>
           </span>
         </span>
          <div id="score" class="col-xs-2">Moves Left: {{states.length-1-state}}</div>
