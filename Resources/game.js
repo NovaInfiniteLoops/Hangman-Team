@@ -80,7 +80,34 @@ function randomWordJson() {
 	    {letter: "Z", visible: true}
     ];
 
+    $scope.resetGame = function () {
 
+          // Seeking a 'single page web application'.   Resetting all the game variables allows us to
+          // reset the game *without* waiting a page refresh.   This is one of the really cool parts of angular
+          // that is not possible with plain vanilla javascript.
+          // note for future iteration:  we need to add a call to the word generator function here when
+          // database funtionality is installed.
+
+          // the Hangman image is bound to the state variable.   If we set the state variable to 0, the
+          // image will automatically update to the initial picture.  No further work needed.
+          $scope.state = 0;
+
+          //reset all the alphabet tiles to visible
+          for(var i = 0; i < $scope.alphabet.length; i++) {
+              $scope.alphabet[i].visible = true;
+          }
+
+          //reset all the tiles in the mystery word to hidden.
+          for(i = 0; i < $scope.word.length; i++) {
+             $scope.word[i].visible = false;
+          }
+
+          //?? We need to add a call to a word generation method here, when db functionailty is added.
+          //debugging code that can be remvoved later.
+          console.log("You clicked RESET");
+        };
+
+      
     $scope.clicked = function (idx) {
       console.log("clicked",idx);
       $scope.alphabet[idx].visible = false;
