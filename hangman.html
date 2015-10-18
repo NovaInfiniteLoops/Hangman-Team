@@ -59,7 +59,11 @@
             <span class="btn btn-info btn-letter btn-concealed ng-class:{'hide': l.visible}">_</span>
           </span>
         </span>
-         <div id="score" class="col-xs-2">Moves Left: {{states.length-1-state}}</div>
+         <span id="gameprogress">
+          <span>Moves Left: {{states.length-1-state}}</span>
+          <span>|Score: {{score}}</span>
+          <span>|Level: {{score}}</span>
+        </span>
     </div>
   </div>
 </div>
