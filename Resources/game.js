@@ -30,13 +30,7 @@ var app = angular.module('game', ['ui.bootstrap']);
     $scope.state = 0;
 
     //placeholder - when we do add database functionality, this is where we will need to populate the word.
-    $scope.word = [
-      {letter: "H", visible: false},
-      {letter: "E", visible: false},
-      {letter: "L", visible: false},
-      {letter: "L", visible: false},
-      {letter: "O", visible: false}
-    ];
+    $scope.word=randomWordJson();
 
     $scope.states = [
       "./Resources/hangman1.gif",
@@ -83,7 +77,7 @@ var app = angular.module('game', ['ui.bootstrap']);
       $scope.alphabet[idx].visible = false;
       var found = false;
       for(var i = 0; i < $scope.word.length; i++) {
-        if ($scope.alphabet[idx].letter === $scope.word[i].letter) {
+        if ($scope.alphabet[idx].letter.toUpperCase() === $scope.word[i].letter.toUpperCase()) {
           $scope.word[i].visible = true;
           found = true;
         }
