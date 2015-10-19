@@ -6,7 +6,7 @@ var app = angular.module('game', ['ui.bootstrap']);
       {letter: "E", visible: false},
       {letter: "L", visible: false},
       {letter: "L", visible: false},
-     // {letter: "O", visible: false}
+      {letter: "O", visible: false}
     ];
 
     $scope.states = [
