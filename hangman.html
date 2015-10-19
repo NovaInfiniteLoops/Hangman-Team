@@ -16,13 +16,19 @@
 
 </head>
 <body ng-controller="hangman">
-
+    
 <div class="container">
   <div class="jumbotron">
-
-     <button id="reset" ng-click="resetGame()" class="btn btn-info">Reset</button>
+      
+      <div class="buttons">
+          
+          <Button id="WelcomePage" onclick="window.location.href='/Hangman-Welcome.html'" class="btn btn-info">Welcome Page</Button>
+          <button id="reset" ng-click="resetGame()" class="btn btn-info">Reset</button>
+          
+      </div>
+      
     <h3 id="header">Infinite Loops Hangman  </h3>
-      <hr>
+    <hr>
 
     <img class="col-xs-12" ng-src="{{states[state]}}">
 
@@ -39,7 +45,7 @@
 </div>
 
 <hr>
-  <div class="row">
+ <div class="row">
     <div class="col-xs-9">
       <h1> Choose a letter </h1>
         <span ng-repeat="letter in alphabet track by $index">
