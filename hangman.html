@@ -16,6 +16,21 @@
 
 </head>
 <body ng-controller="hangman">
+    
+<div class="player selection">
+    
+    <p class = "">Select Single Player or Multi Player Game:</p>
+    
+    <button ng-click = "count = count +1" ng-init = "count = 0" id="1 Player" class="btn btn-info">Single Player Game</buton>
+    <span>
+  count: {{count}}
+</span>
+    
+    
+    <button id="2 Players" class="btn btn-info">Multi Player Game</buton>
+    
+    
+    </div>
 
 <div class="container">
   <div class="jumbotron">
@@ -39,7 +54,7 @@
 </div>
 
 <hr>
-  <div class="row">
+ <div class="row">
     <div class="col-xs-9">
       <h1> Choose a letter </h1>
         <span ng-repeat="letter in alphabet track by $index">
