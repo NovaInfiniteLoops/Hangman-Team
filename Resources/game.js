@@ -32,6 +32,24 @@ var app = angular.module('game', ['ui.bootstrap']);
     //placeholder - when we do add database functionality, this is where we will need to populate the word.
     $scope.word=randomWordJson();
 
+    function puzzleSolved () {
+  var solved=false;
+
+  for (var i=0; i < $scope.word.length; i++) {
+    if (!$scope.word[i].visible) {
+      return false;
+    } else if (($scope.word[i].visible) && (i==$scope.word.length-1)) {
+      alert('solved');
+      return true;
+    }
+  }
+}
+
+
+  function startNewLevel() {
+    $scope.state = 0;
+    $scope.word=randomWordJson();
+  }
     $scope.states = [
       "./Resources/hangman1.gif",
       "./Resources/hangman2.gif",
@@ -85,6 +103,10 @@ var app = angular.module('game', ['ui.bootstrap']);
       if (!found) {
         $scope.state += 1;
       }
+
+      if (puzzleSolved()) {
+        startNewLevel();
+      }
     };
 
     $scope.resetGame = function () {
@@ -118,13 +140,4 @@ var app = angular.module('game', ['ui.bootstrap']);
       return $scope.states[$scope.state];
     };
 
-  }]);
-
-  app.controller("discard_pile", ["$scope", function ($scope) {
-    $scope.letters = letters = [
-      {letter: "A", visible: true},
-      {letter: "B", visible: true},
-      {letter: "C", visible: false},
-      {letter: "D", visible: true}
-    ];
   }]);
