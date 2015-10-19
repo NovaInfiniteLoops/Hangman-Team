@@ -17,27 +17,18 @@
 </head>
 <body ng-controller="hangman">
     
-<div class="player selection">
-    
-    <p class = "">Select Single Player or Multi Player Game:</p>
-    
-    <button ng-click = "count = count +1" ng-init = "count = 0" id="1 Player" class="btn btn-info">Single Player Game</buton>
-    <span>
-  count: {{count}}
-</span>
-    
-    
-    <button id="2 Players" class="btn btn-info">Multi Player Game</buton>
-    
-    
-    </div>
-
 <div class="container">
   <div class="jumbotron">
-
-     <button id="reset" ng-click="resetGame()" class="btn btn-info">Reset</button>
+      
+      <div class="buttons">
+          
+          <Button id="WelcomePage" onclick="window.location.href='/Hangman-Welcome.html'" class="btn btn-info">Welcome Page</Button>
+          <button id="reset" ng-click="resetGame()" class="btn btn-info">Reset</button>
+          
+      </div>
+      
     <h3 id="header">Infinite Loops Hangman  </h3>
-      <hr>
+    <hr>
 
     <img class="col-xs-12" ng-src="{{states[state]}}">
 
