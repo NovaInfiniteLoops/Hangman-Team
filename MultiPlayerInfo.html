@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+<title>Hangman Multi Player Info</title>
+
+<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="Resources/hangman.css" >    
+    
+    <style type= "text/css">
+        
+        h2{
+            color:red;
+        }
+    
+        p{
+            font-size: 15px;
+            color:dimgray;
+        }
+        
+        button{
+        font-size: 20px;
+                
+        }
+        
+        div{
+        text-align: center;
+        
+        }
+      
+    
+    
+    </style>
+    
+</head>
+
+
+<body>
+
+<h2><center>Bounty Hangman Multi Player</center></h2>
+    
+    <div>
+        <p>Players...</p>
+        <p>Enter your names and your words below.</p>
+        
+        <button class = "btn btn-info" onclick="window.location.href='/Hangman-Welcome.html'">Back to Welcome Page</button>
+        <button class = "btn btn-info">Reset Info Below</button>
+    </div>
+    <br>
+    <br>
+     
+<div class="MultiPlayerInfo">
+    
+   <form action="hangman.html">
+       Player 1 Name: <input type="text" name="Player1Name" value="Emre"><br><br>
+       Hangman Word: <input type="password" name="Player1Word" value="Cat" ><br><br><br>
+        Player 2 Name: <input type="text" name="Player2Name" value="What"><br><br>
+       Hangman Word: <input type="password" name="Player2Word" value="Mouse" ><br><br>
+       <input type="submit" class = "btn btn-info" value="Submit">
+    </form>
+    
+</div>
+
+
+</body>
+
+</html>
