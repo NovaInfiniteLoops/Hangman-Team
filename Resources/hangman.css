@@ -6,7 +6,17 @@
 .hide {
     font-family:"Webdings"
 }
-
+#bountybox {
+  font-size: 2em;
+	position: fixed;
+  border-style: outset;
+  border-width: medium;
+  border-color: gray;
+  text-align: center;
+	left: 40px;
+  top: 40px;
+  font-size : 2em;
+}
 #reset {
     float:right;
     clear:left;
@@ -35,7 +45,18 @@
     font-family:courier;
     font-weight:bold;
     margin-top:3px;
-    
+
+}
+
+.btn-bountybox {
+    background-color:white;
+    border-color:firebrick;
+    color: black;
+    font-family:courier;
+    font-weight:bold;
+    margin-top:3px;
+    font-size: .75em;
+    text-align: center;
 }
 .btn-letter{
     border-style:none;
@@ -60,7 +81,7 @@ hr {
     border: 0;
     width: 80%;
     height: 3px;
-    
+
 }
 h1 {
     color:firebrick;
