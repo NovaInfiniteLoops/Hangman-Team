@@ -32,23 +32,53 @@ var app = angular.module('game', ['ui.bootstrap']);
     //placeholder - when we do add database functionality, this is where we will need to populate the word.
     $scope.word=randomWordJson();
 
-    function puzzleSolved () {
+function puzzleSolved () {
   var solved=false;
 
   for (var i=0; i < $scope.word.length; i++) {
     if (!$scope.word[i].visible) {
       return false;
     } else if (($scope.word[i].visible) && (i==$scope.word.length-1)) {
-      alert('solved');
       return true;
     }
   }
 }
 
 
+
+
   function startNewLevel() {
     $scope.state = 0;
     $scope.word=randomWordJson();
+    $scope.alphabet = [
+      {letter: "A", visible: true},
+      {letter: "B", visible: true},
+      {letter: "C", visible: true},
+      {letter: "D", visible: true},
+	    {letter: "E", visible: true},
+	    {letter: "F", visible: true},
+      {letter: "G", visible: true},
+      {letter: "H", visible: true},
+      {letter: "I", visible: true},
+	    {letter: "J", visible: true},
+	    {letter: "K", visible: true},
+      {letter: "L", visible: true},
+      {letter: "M", visible: true},
+      {letter: "N", visible: true},
+	    {letter: "O", visible: true},
+  	  {letter: "P", visible: true},
+      {letter: "Q", visible: true},
+      {letter: "R", visible: true},
+      {letter: "S", visible: true},
+	    {letter: "T", visible: true},
+      {letter: "U", visible: true},
+      {letter: "V", visible: true},
+      {letter: "W", visible: true},
+      {letter: "X", visible: true},
+	    {letter: "Y", visible: true},
+	    {letter: "Z", visible: true}
+    ];
+
   }
     $scope.states = [
       "./Resources/hangman1.gif",
@@ -90,24 +120,39 @@ var app = angular.module('game', ['ui.bootstrap']);
     ];
 
 
+
     $scope.clicked = function (idx) {
-      console.log("clicked",idx);
-      $scope.alphabet[idx].visible = false;
-      var found = false;
-      for(var i = 0; i < $scope.word.length; i++) {
-        if ($scope.alphabet[idx].letter.toUpperCase() === $scope.word[i].letter.toUpperCase()) {
-          $scope.word[i].visible = true;
-          found = true;
+
+
+      if ($scope.states.length-1-$scope.state > 0 ) {
+        $scope.alphabet[idx].visible = false;
+        var found = false;
+        for(var i = 0; i < $scope.word.length; i++) {
+          if ($scope.alphabet[idx].letter.toUpperCase() === $scope.word[i].letter.toUpperCase()) {
+            $scope.word[i].visible = true;
+            found = true;
+          }
+        }
+        if (!found) {
+          $scope.state += 1;
         }
       }
-      if (!found) {
-        $scope.state += 1;
-      }
+      console.log("puzzle solved: " , puzzleSolved() , ",scope.state" , $scope.state , "scope.states.length-1 " , $scope.states.length-1);
 
+      // is the puzzle solved?  if so, Great! let's move on and play some more.  If Not, Notify of Loss and Start New Game
       if (puzzleSolved()) {
         startNewLevel();
+      //  $window.alert("Good Job, Proceed to Next Level!");
+      } else if ($scope.state==($scope.states.length-1)) {
+  //      $window.alert("You lost the word was x");
       }
-    };
+
+
+      }
+
+
+
+
 
     $scope.resetGame = function () {
 
@@ -130,6 +175,8 @@ var app = angular.module('game', ['ui.bootstrap']);
       for(i = 0; i < $scope.word.length; i++) {
          $scope.word[i].visible = false;
       }
+
+      $scope.word=randomWordJson();
 
       //?? We need to add a call to a word generation method here, when db functionailty is added.
       //debugging code that can be remvoved later.
