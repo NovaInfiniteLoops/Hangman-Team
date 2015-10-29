@@ -157,7 +157,7 @@ function randomIndexfromWord () {
 
     $scope.clicked = function (idx) {
 
-      console.log(randomIndexfromWord());
+
       if ($scope.states.length-1-$scope.state > 0 ) {
         $scope.alphabet[idx].visible = false;
         var found = false;
@@ -178,7 +178,7 @@ function randomIndexfromWord () {
         startNewLevel();
       //  $window.alert("Good Job, Proceed to Next Level!");
       } else if ($scope.state==($scope.states.length-1)) {
-  //      $window.alert("You lost the word was x");
+         $scope.statusMsg = "YOU LOST.  HIT RESET!"
       }
 
 
@@ -206,7 +206,22 @@ function randomIndexfromWord () {
     };
 
     $scope.buyVowel = function() {
-      console.log("You bought a vowel");
+      letterExists=false;
+      letterIndex=-1;
+      for (var i = 0; i < $scope.word.length; i++) {
+        if (isVowel($scope.word[i].letter) && (!$scope.word[i].visible)) {
+          letterExists=true;
+          letterIndex=i;
+        }
+      }
+      if (!letterExists) {
+        alert('I am sorry but no voewls are left.  You are almost there');
+      } else if ($scope.bounty < 75) {
+          alert('I am sorry but you cannot afford this.  No soup for you.');
+      } else {
+        $scope.bounty += -75;
+        $scope.word[letterIndex].visible=true;
+      }
     };
 
 
@@ -224,6 +239,10 @@ function randomIndexfromWord () {
       // the Hangman image is bound to the state variable.   If we set the state variable to 0, the
       // image will automatically update to the initial picture.  No further work needed.
       $scope.state = 0;
+
+      $scope.level=1;
+
+      $scope.statusMsg="Level 1";
 
       //reset all the alphabet tiles to visible
       for(var i = 0; i < $scope.alphabet.length; i++) {
