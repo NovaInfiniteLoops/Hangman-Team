@@ -25,16 +25,68 @@ function randomWordJson() {
    return obj;
  }
 
+
+
+//ok, next two lines are some of the most important code the game.  We are defining the anguular app and the controller.
+//TO-DO:  is it best practice to have a single controller?
 var app = angular.module('game', ['ui.bootstrap']);
   app.controller("hangman", ["$scope", function ($scope, $window) {
     $scope.state = 0;
 
-    //placeholder - when we do add database functionality, this is where we will need to populate the word.
+    //placeholder - when we do add database functionality, this is where we will need to populate the word from db.
     $scope.word=randomWordJson();
 
-function puzzleSolved () {
-  var solved=false;
+    $scope.states = [
+      "./Resources/hangman1.gif",
+      "./Resources/hangman2.gif",
+      "./Resources/hangman3.gif",
+      "./Resources/hangman4.gif",
+      "./Resources/hangman5.gif",
+      "./Resources/hangman6.gif",
+      "./Resources/hangman7_dead.gif"
+    ];
 
+    $scope.bounty=75;
+
+    $scope.level=1;
+
+    $scope.statusMsg="Level 1";
+
+    $scope.alphabet = [
+      {letter: "A", visible: true},
+      {letter: "B", visible: true},
+      {letter: "C", visible: true},
+      {letter: "D", visible: true},
+      {letter: "E", visible: true},
+      {letter: "F", visible: true},
+      {letter: "G", visible: true},
+      {letter: "H", visible: true},
+      {letter: "I", visible: true},
+      {letter: "J", visible: true},
+      {letter: "K", visible: true},
+      {letter: "L", visible: true},
+      {letter: "M", visible: true},
+      {letter: "N", visible: true},
+      {letter: "O", visible: true},
+      {letter: "P", visible: true},
+      {letter: "Q", visible: true},
+      {letter: "R", visible: true},
+      {letter: "S", visible: true},
+      {letter: "T", visible: true},
+      {letter: "U", visible: true},
+      {letter: "V", visible: true},
+      {letter: "W", visible: true},
+      {letter: "X", visible: true},
+      {letter: "Y", visible: true},
+      {letter: "Z", visible: true}
+    ];
+
+
+function puzzleSolved () {
+
+  var solved=false;
+  //a simple booelan function that checks to see if all letters in the word are visible.   If they
+  //they are, return true becuase that means that the puzzle is solbe.
   for (var i=0; i < $scope.word.length; i++) {
     if (!$scope.word[i].visible) {
       return false;
@@ -43,6 +95,7 @@ function puzzleSolved () {
     }
   }
 }
+
 
 function randomIndexfromWord () {
   found=false;
@@ -108,52 +161,6 @@ function randomIndexfromWord () {
     ];
 
   }
-    $scope.states = [
-      "./Resources/hangman1.gif",
-      "./Resources/hangman2.gif",
-      "./Resources/hangman3.gif",
-      "./Resources/hangman4.gif",
-      "./Resources/hangman5.gif",
-      "./Resources/hangman6.gif",
-      "./Resources/hangman7_dead.gif"
-    ];
-
-    $scope.bounty=75;
-
-    $scope.level=1;
-
-    $scope.statusMsg="Level 1";
-
-    $scope.alphabet = [
-      {letter: "A", visible: true},
-      {letter: "B", visible: true},
-      {letter: "C", visible: true},
-      {letter: "D", visible: true},
-	    {letter: "E", visible: true},
-	    {letter: "F", visible: true},
-      {letter: "G", visible: true},
-      {letter: "H", visible: true},
-      {letter: "I", visible: true},
-	    {letter: "J", visible: true},
-	    {letter: "K", visible: true},
-      {letter: "L", visible: true},
-      {letter: "M", visible: true},
-      {letter: "N", visible: true},
-	    {letter: "O", visible: true},
-  	  {letter: "P", visible: true},
-      {letter: "Q", visible: true},
-      {letter: "R", visible: true},
-      {letter: "S", visible: true},
-	    {letter: "T", visible: true},
-      {letter: "U", visible: true},
-      {letter: "V", visible: true},
-      {letter: "W", visible: true},
-      {letter: "X", visible: true},
-	    {letter: "Y", visible: true},
-	    {letter: "Z", visible: true}
-    ];
-
-
 
     $scope.clicked = function (idx) {
 
@@ -175,6 +182,7 @@ function randomIndexfromWord () {
 
       // is the puzzle solved?  if so, Great! let's move on and play some more.  If Not, Notify of Loss and Start New Game
       if (puzzleSolved()) {
+        $scope.statusMsg="LEVEL WON!";
         startNewLevel();
       //  $window.alert("Good Job, Proceed to Next Level!");
       } else if ($scope.state==($scope.states.length-1)) {
@@ -243,6 +251,8 @@ function randomIndexfromWord () {
       $scope.level=1;
 
       $scope.statusMsg="Level 1";
+
+      $scope.bounty=75;
 
       //reset all the alphabet tiles to visible
       for(var i = 0; i < $scope.alphabet.length; i++) {
