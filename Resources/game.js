@@ -7,7 +7,7 @@ function randomWordJson() {
    //     2) convert that word into the JSON object format that we are using for
    //        the 'Hangman word';
    word=dictionary[Math.floor((Math.random() * dictionary.length) + 1)];
-
+   console.log(word);
    //text is a long string that we are concatenating together.
    var text='[';
    for (var i=0; i < word.length; i++) {
@@ -44,17 +44,18 @@ function puzzleSolved () {
   }
 }
 
-function randomLetterfromWord () {
+function randomIndexfromWord () {
   found=false;
-  index=0;
-  if (!puzzleSolved) {
-    while (!found)
-       index=Math.floor((Math.random() * $scope.word.length) + 1);
-      if ($scope.word[index].visible===false) {
-        found=true;
-      }
+  i=Math.floor((Math.random() * $scope.word.length));
+  while (!found) {
+    console.log("seeking a random letter that is hidden");
+    i=Math.floor((Math.random() * $scope.word.length));
+    if (!$scope.word[i].letter.visible) {
+      found=true;
+      console.log("I have found her: ", i);
+    }
   }
-  return index;
+  return i;
 }
 
 
@@ -73,6 +74,8 @@ function randomLetterfromWord () {
 
   function startNewLevel() {
     $scope.bounty += 25;
+    $scope.level +=1;
+    $scope.statusMsg="Level " + $scope.level;
     $scope.state = 0;
     $scope.word=randomWordJson();
     $scope.alphabet = [
@@ -119,7 +122,7 @@ function randomLetterfromWord () {
 
     $scope.level=1;
 
-    $scope.statusMsg="Level " + $scope.level;
+    $scope.statusMsg="Level 1";
 
     $scope.alphabet = [
       {letter: "A", visible: true},
@@ -154,7 +157,7 @@ function randomLetterfromWord () {
 
     $scope.clicked = function (idx) {
 
-      console.log($scope.word[randomLetterfromWord()]);
+      console.log(randomIndexfromWord());
       if ($scope.states.length-1-$scope.state > 0 ) {
         $scope.alphabet[idx].visible = false;
         var found = false;
@@ -168,7 +171,7 @@ function randomLetterfromWord () {
           $scope.state += 1;
         }
       }
-      console.log("puzzle solved: " , puzzleSolved() , ",scope.state" , $scope.state , "scope.states.length-1 " , $scope.states.length-1);
+
 
       // is the puzzle solved?  if so, Great! let's move on and play some more.  If Not, Notify of Loss and Start New Game
       if (puzzleSolved()) {
@@ -183,7 +186,23 @@ function randomLetterfromWord () {
 
 
     $scope.buyLetter = function() {
-      console.log("You bought a letter");
+      letterExists=false;
+      letterIndex=-1;
+      for (var i = 0; i < $scope.word.length; i++) {
+        if (!isVowel($scope.word[i].letter) && (!$scope.word[i].visible)) {
+          letterExists=true;
+          letterIndex=i;
+        }
+      }
+      if (!letterExists) {
+        alert('I am sorry but no consonants are left.  You are almost there');
+      } else if ($scope.bounty < 25) {
+          alert('I am sorry but you are broke.  No soup for you.');
+      } else {
+        $scope.bounty += -25;
+        $scope.word[letterIndex].visible=true;
+      }
+
     };
 
     $scope.buyVowel = function() {
@@ -218,9 +237,8 @@ function randomLetterfromWord () {
 
       $scope.word=randomWordJson();
 
-      //?? We need to add a call to a word generation method here, when db functionailty is added.
-      //debugging code that can be remvoved later.
-      console.log("You clicked RESET");
+
+
     };
 
     $scope.stateImg = function () {
