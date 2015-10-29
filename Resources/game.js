@@ -7,7 +7,7 @@ function randomWordJson() {
    //     2) convert that word into the JSON object format that we are using for
    //        the 'Hangman word';
    word=dictionary[Math.floor((Math.random() * dictionary.length) + 1)];
-
+   console.log(word);
    //text is a long string that we are concatenating together.
    var text='[';
    for (var i=0; i < word.length; i++) {
@@ -26,7 +26,7 @@ function randomWordJson() {
  }
 
 var app = angular.module('game', ['ui.bootstrap']);
-  app.controller("hangman", ["$scope", function ($scope) {
+  app.controller("hangman", ["$scope", function ($scope, $window) {
     $scope.state = 0;
 
     //placeholder - when we do add database functionality, this is where we will need to populate the word.
@@ -44,10 +44,38 @@ function puzzleSolved () {
   }
 }
 
+function randomIndexfromWord () {
+  found=false;
+  i=Math.floor((Math.random() * $scope.word.length));
+  while (!found) {
+    console.log("seeking a random letter that is hidden");
+    i=Math.floor((Math.random() * $scope.word.length));
+    if (!$scope.word[i].letter.visible) {
+      found=true;
+      console.log("I have found her: ", i);
+    }
+  }
+  return i;
+}
 
 
+
+  function isVowel (letter) {
+    //returns true if a vowel, false if not.
+    //preconditions:  assumes 'letter' is truly a letter
+    var found=false;
+    var vowel= new Array("A", "E", "I", "O", "U");
+    for (var i=0; i < vowel.length; i++) {
+      if (vowel.indexOf(letter.toUpperCase()) >= 0)
+        found=true;
+      }
+   return found;
+  }
 
   function startNewLevel() {
+    $scope.bounty += 25;
+    $scope.level +=1;
+    $scope.statusMsg="Level " + $scope.level;
     $scope.state = 0;
     $scope.word=randomWordJson();
     $scope.alphabet = [
@@ -89,6 +117,12 @@ function puzzleSolved () {
       "./Resources/hangman6.gif",
       "./Resources/hangman7_dead.gif"
     ];
+
+    $scope.bounty=75;
+
+    $scope.level=1;
+
+    $scope.statusMsg="Level 1";
 
     $scope.alphabet = [
       {letter: "A", visible: true},
@@ -137,18 +171,58 @@ function puzzleSolved () {
           $scope.state += 1;
         }
       }
-      console.log("puzzle solved: " , puzzleSolved() , ",scope.state" , $scope.state , "scope.states.length-1 " , $scope.states.length-1);
+
 
       // is the puzzle solved?  if so, Great! let's move on and play some more.  If Not, Notify of Loss and Start New Game
       if (puzzleSolved()) {
         startNewLevel();
       //  $window.alert("Good Job, Proceed to Next Level!");
       } else if ($scope.state==($scope.states.length-1)) {
-  //      $window.alert("You lost the word was x");
+         $scope.statusMsg = "YOU LOST.  HIT RESET!"
       }
 
 
+    };
+
+
+    $scope.buyLetter = function() {
+      letterExists=false;
+      letterIndex=-1;
+      for (var i = 0; i < $scope.word.length; i++) {
+        if (!isVowel($scope.word[i].letter) && (!$scope.word[i].visible)) {
+          letterExists=true;
+          letterIndex=i;
+        }
       }
+      if (!letterExists) {
+        alert('I am sorry but no consonants are left.  You are almost there');
+      } else if ($scope.bounty < 25) {
+          alert('I am sorry but you are broke.  No soup for you.');
+      } else {
+        $scope.bounty += -25;
+        $scope.word[letterIndex].visible=true;
+      }
+
+    };
+
+    $scope.buyVowel = function() {
+      letterExists=false;
+      letterIndex=-1;
+      for (var i = 0; i < $scope.word.length; i++) {
+        if (isVowel($scope.word[i].letter) && (!$scope.word[i].visible)) {
+          letterExists=true;
+          letterIndex=i;
+        }
+      }
+      if (!letterExists) {
+        alert('I am sorry but no voewls are left.  You are almost there');
+      } else if ($scope.bounty < 75) {
+          alert('I am sorry but you cannot afford this.  No soup for you.');
+      } else {
+        $scope.bounty += -75;
+        $scope.word[letterIndex].visible=true;
+      }
+    };
 
 
 
@@ -166,6 +240,10 @@ function puzzleSolved () {
       // image will automatically update to the initial picture.  No further work needed.
       $scope.state = 0;
 
+      $scope.level=1;
+
+      $scope.statusMsg="Level 1";
+
       //reset all the alphabet tiles to visible
       for(var i = 0; i < $scope.alphabet.length; i++) {
           $scope.alphabet[i].visible = true;
@@ -178,9 +256,8 @@ function puzzleSolved () {
 
       $scope.word=randomWordJson();
 
-      //?? We need to add a call to a word generation method here, when db functionailty is added.
-      //debugging code that can be remvoved later.
-      console.log("You clicked RESET");
+
+
     };
 
     $scope.stateImg = function () {
