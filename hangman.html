@@ -18,7 +18,7 @@
 
 <div class="container">
   <div id="bountybox">
-     <h4>$200 in Bounty Bank!</h4>
+     <h4>${{bounty}} in Bounty Bank!</h4>
      <div>
      <img src="./Resources/bounty.jpg" width=75 height=75>
    </div>
@@ -34,14 +34,18 @@
        </tr>
        <tr>
          <td>
-           <span class="btn btn-bountybox">BCD...</span>
+           <span ng-click="buyLetter()" class="btn btn-bountybox">BCD...</span>
          </td>
          <td>
-           <span class="btn btn-bountybox">AEI...</span>
+           <span ng-click="buyVowel()" class="btn btn-bountybox">AEI...</span>
          </td>
         </tr>
      </table>
    </div>
+  </div>
+
+  <div id="statusbox">
+    <h3> {{statusMsg}} </h3>
   </div>
 <body ng-controller="hangman">
 

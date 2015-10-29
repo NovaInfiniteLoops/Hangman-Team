@@ -17,6 +17,18 @@
   top: 40px;
   font-size : 2em;
 }
+
+#statusbox {
+  font-size: 2em;
+	position: fixed;
+  border-style: outset;
+  border-width: medium;
+  border-color: gray;
+  text-align: center;
+	left: 40px;
+  top: 250px;
+  font-size : 2em;
+}
 #reset {
     float:right;
     clear:left;

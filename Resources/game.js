@@ -26,7 +26,7 @@ function randomWordJson() {
  }
 
 var app = angular.module('game', ['ui.bootstrap']);
-  app.controller("hangman", ["$scope", function ($scope) {
+  app.controller("hangman", ["$scope", function ($scope, $window) {
     $scope.state = 0;
 
     //placeholder - when we do add database functionality, this is where we will need to populate the word.
@@ -44,10 +44,35 @@ function puzzleSolved () {
   }
 }
 
+function randomLetterfromWord () {
+  found=false;
+  index=0;
+  if (!puzzleSolved) {
+    while (!found)
+       index=Math.floor((Math.random() * $scope.word.length) + 1);
+      if ($scope.word[index].visible===false) {
+        found=true;
+      }
+  }
+  return index;
+}
 
 
+
+  function isVowel (letter) {
+    //returns true if a vowel, false if not.
+    //preconditions:  assumes 'letter' is truly a letter
+    var found=false;
+    var vowel= new Array("A", "E", "I", "O", "U");
+    for (var i=0; i < vowel.length; i++) {
+      if (vowel.indexOf(letter.toUpperCase()) >= 0)
+        found=true;
+      }
+   return found;
+  }
 
   function startNewLevel() {
+    $scope.bounty += 25;
     $scope.state = 0;
     $scope.word=randomWordJson();
     $scope.alphabet = [
@@ -90,6 +115,12 @@ function puzzleSolved () {
       "./Resources/hangman7_dead.gif"
     ];
 
+    $scope.bounty=75;
+
+    $scope.level=1;
+
+    $scope.statusMsg="Level " + $scope.level;
+
     $scope.alphabet = [
       {letter: "A", visible: true},
       {letter: "B", visible: true},
@@ -123,7 +154,7 @@ function puzzleSolved () {
 
     $scope.clicked = function (idx) {
 
-
+      console.log($scope.word[randomLetterfromWord()]);
       if ($scope.states.length-1-$scope.state > 0 ) {
         $scope.alphabet[idx].visible = false;
         var found = false;
@@ -148,7 +179,16 @@ function puzzleSolved () {
       }
 
 
-      }
+    };
+
+
+    $scope.buyLetter = function() {
+      console.log("You bought a letter");
+    };
+
+    $scope.buyVowel = function() {
+      console.log("You bought a vowel");
+    };
 
 
 
