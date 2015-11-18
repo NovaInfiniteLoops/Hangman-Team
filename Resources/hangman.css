@@ -11,11 +11,18 @@
 	position: fixed;
   border-style: outset;
   border-width: medium;
-  border-color: gray;
+  border-color: firebrick;
+  color: midnightblue;
   text-align: center;
 	left: 40px;
   top: 40px;
   font-size : 2em;
+}
+
+#reset {
+	float:right;
+    clear:left;
+    padding: 10px;
 }
 
 #statusbox {
@@ -23,19 +30,14 @@
 	position: fixed;
   border-style: outset;
   border-width: medium;
-  border-color: gray;
+  border-color: firebrick;
+  color: firebrick;
   text-align: center;
 	left: 40px;
   top: 250px;
   font-size : 2em;
 }
-#reset {
-    float:right;
-    clear:left;
-    padding: 10px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight:normal;
-}
+
 #header {
     #background-color:black;
     color:firebrick;
@@ -59,11 +61,50 @@
     margin-top:3px;
 
 }
+.btn-info:focus,
+.btn-info.focus {
+  color: #fff;
+  background-color: firebrick;
+  border-color: firebrick;
+}
+.btn-info:hover {
+  color: #fff;
+  background-color: firebrick;
+  border-color: firebrick;
+}
+.btn-info:active,
+.btn-info.active,
+.open > .dropdown-toggle.btn-info {
+  color: #fff;
+  background-color: firebrick;
+  border-color: firebrick;
+}
+
+.btn-info:active,
+.btn-info.active,
+.open > .dropdown-toggle.btn-info {
+  color: #fff;
+  background-color: firebrick;
+  border-color: firebrick;
+}
+.btn-info:active:hover,
+.btn-info.active:hover,
+.open > .dropdown-toggle.btn-info:hover,
+.btn-info:active:focus,
+.btn-info.active:focus,
+.open > .dropdown-toggle.btn-info:focus,
+.btn-info:active.focus,
+.btn-info.active.focus,
+.open > .dropdown-toggle.btn-info.focus {
+  color: #fff;
+  background-color: firebrick;
+  border-color: firebrick;
+}
 
 .btn-bountybox {
     background-color:white;
     border-color:firebrick;
-    color: black;
+    color:firebrick;
     font-family:courier;
     font-weight:bold;
     margin-top:3px;
@@ -79,6 +120,14 @@
 .btn-concealed{
     color:white
 }
+.btn-ctrl {
+
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:normal;
+	color: midnightblue;
+	border-color:midnightblue;
+}
+
 .jumbotron {
     background-color:white;
     padding:0px;
@@ -89,7 +138,7 @@
     padding-left:40px;
 }
 hr {
-    background-color:firebrick;
+    background-color:midnightblue;
     border: 0;
     width: 80%;
     height: 3px;

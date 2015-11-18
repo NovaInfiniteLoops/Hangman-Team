@@ -20,7 +20,7 @@
   <div id="bountybox">
      <h4>${{bounty}} in Bounty Bank!</h4>
      <div>
-     <img src="./Resources/bounty.jpg" width=75 height=75>
+     <img src="./Resources/bounty.jpg" width=60 height=75>
    </div>
    <div>
      <table>
@@ -44,7 +44,7 @@
    </div>
   </div>
 
-  <div id="statusbox">
+  <div id="statusbox" class="ng-class:{'hide': statusMsg == ''}">
     <h3> {{statusMsg}} </h3>
   </div>
 <body ng-controller="hangman">
@@ -54,8 +54,8 @@
 
       <div class="buttons">
 
-          <Button id="WelcomePage" onclick="window.location.href='/Hangman-Welcome.html'" class="btn btn-info">Welcome Page</Button>
-          <button id="reset" ng-click="resetGame()" class="btn btn-info">Reset</button>
+          <Button id="WelcomePage" onclick="window.location.href='/Hangman-Welcome.html'" class="btn-ctrl btn btn-info">Welcome Page</Button>
+          <button id="reset" ng-click="resetGame()" class="btn btn-info btn-ctrl">Reset</button>
 
       </div>
 
@@ -71,8 +71,9 @@
             <span class="btn btn-info btn-letter ng-class:{'hide': l.visible}">_</span>
           </span>
         </span>
-         <div id="score" class="col-xs-2">Moves Left: {{states.length-1-state}}</div>
-    </div>
+         <div id="score" class="col-xs-2">Moves Left: {{states.length-1-state}}
+		 <br>Level: {{level}}</div>
+    </div> 
   </div>
 </div>
 
