@@ -50,7 +50,7 @@ var app = angular.module('game', ['ui.bootstrap']);
 
     $scope.level=1;
 
-    $scope.statusMsg="Level 1";
+    $scope.statusMsg="";
 
     $scope.alphabet = [
       {letter: "A", visible: true},
@@ -128,7 +128,8 @@ function randomIndexfromWord () {
   function startNewLevel() {
     $scope.bounty += 25;
     $scope.level +=1;
-    $scope.statusMsg="Level " + $scope.level;
+    //$scope.statusMsg="Level " + $scope.level;
+	$scope.statusMsg="";
     $scope.state = 0;
     $scope.word=randomWordJson();
     $scope.alphabet = [
@@ -250,7 +251,7 @@ function randomIndexfromWord () {
 
       $scope.level=1;
 
-      $scope.statusMsg="Level 1";
+      $scope.statusMsg="";
 
       $scope.bounty=75;
 
