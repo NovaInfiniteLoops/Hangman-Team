@@ -238,10 +238,10 @@ function randomIndexfromWord () {
       }
       if (!letterExists) {
         alert('I am sorry but no consonants are left.  You are almost there');
-      } else if ($scope.bounty < 25) {
+      } else if ($scope.bounty < 10) {
           alert('I am sorry but you are broke.  No soup for you.');
       } else {
-        $scope.bounty += -25;
+        $scope.bounty += -10;
         $scope.word[letterIndex].visible=true;
       }
 
@@ -258,10 +258,10 @@ function randomIndexfromWord () {
       }
       if (!letterExists) {
         alert('I am sorry but no voewls are left.  You are almost there');
-      } else if ($scope.bounty < 75) {
+      } else if ($scope.bounty < 35) {
           alert('I am sorry but you cannot afford this.  No soup for you.');
       } else {
-        $scope.bounty += -75;
+        $scope.bounty += -35;
         $scope.word[letterIndex].visible=true;
       }
     };
