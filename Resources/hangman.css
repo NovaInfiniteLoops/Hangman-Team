@@ -19,6 +19,10 @@
   font-size : 2em;
 }
 
+.multiplayer {
+  font-size: 1.2em;
+  text-align: center;
+}
 #reset {
 	float:right;
     clear:left;
