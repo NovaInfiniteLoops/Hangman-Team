@@ -243,6 +243,17 @@ function randomIndexfromWord () {
       } else {
         $scope.bounty += -10;
         $scope.word[letterIndex].visible=true;
+        
+          if (puzzleSolved()) {
+        $scope.statusMsg="LEVEL WON!";
+        window.alert('Level Solved');
+        startNewLevel();
+      //  $window.alert("Good Job, Proceed to Next Level!");
+      } else if ($scope.state==($scope.states.length-1)) {
+         $scope.statusMsg = "YOU LOST.  HIT RESET!";
+      }
+
+        
       }
 
     };
@@ -263,6 +274,16 @@ function randomIndexfromWord () {
       } else {
         $scope.bounty += -35;
         $scope.word[letterIndex].visible=true;
+          
+          if (puzzleSolved()) {
+        $scope.statusMsg="LEVEL WON!";
+        window.alert('Level Solved');
+        startNewLevel();
+      //  $window.alert("Good Job, Proceed to Next Level!");
+      } else if ($scope.state==($scope.states.length-1)) {
+         $scope.statusMsg = "YOU LOST.  HIT RESET!";
+      }
+
       }
     };
 
