@@ -57,7 +57,7 @@ function getLetterScore(letter, w_length) {
 //ok, next two lines are some of the most important code the game.  We are defining the anguular app and the controller.
 //TO-DO:  is it best practice to have a single controller?
 var app = angular.module('game', ['ui.bootstrap']);
-  app.controller("hangman", ["$scope", "$window", function ($scope) {
+   app.controller("hangman", ["$scope", "$timeout", function ($scope, $timeout) {
     $scope.state = 0;
 
     //placeholder - when we do add database functionality, this is where we will need to populate the word from db.
@@ -216,9 +216,9 @@ function randomIndexfromWord () {
       // is the puzzle solved?  if so, Great! let's move on and play some more.  If Not, Notify of Loss and Start New Game
       if (puzzleSolved()) {
         $scope.statusMsg="LEVEL WON!";
-        window.alert('Level Solved');
-        startNewLevel();
-      //  $window.alert("Good Job, Proceed to Next Level!");
+
+      //  window.alert('Level Solved');
+        $timeout(startNewLevel, 2000);
       } else if ($scope.state==($scope.states.length-1)) {
          $scope.statusMsg = "YOU LOST.  HIT RESET!";
       }
@@ -243,7 +243,7 @@ function randomIndexfromWord () {
       } else {
         $scope.bounty += -10;
         $scope.word[letterIndex].visible=true;
-        
+
           if (puzzleSolved()) {
         $scope.statusMsg="LEVEL WON!";
         window.alert('Level Solved');
@@ -253,7 +253,7 @@ function randomIndexfromWord () {
          $scope.statusMsg = "YOU LOST.  HIT RESET!";
       }
 
-        
+
       }
 
     };
@@ -274,7 +274,7 @@ function randomIndexfromWord () {
       } else {
         $scope.bounty += -35;
         $scope.word[letterIndex].visible=true;
-          
+
           if (puzzleSolved()) {
         $scope.statusMsg="LEVEL WON!";
         window.alert('Level Solved');
