@@ -53,10 +53,23 @@
   <div class="jumbotron">
 
       <div class="buttons">
-
-          <Button id="WelcomePage" onclick="window.location.href='/Hangman-Welcome.html'" class="btn-ctrl btn btn-info">Welcome Page</Button>
+        <!-- hiding welcome page link until we determine if proposed multiplayer solution is acceptable -->
+        <!--  <Button id="WelcomePage" onclick="window.location.href='/Hangman-Welcome.html'" class="btn-ctrl btn btn-info">Welcome Page</Button> -->
           <button id="reset" ng-click="resetGame()" class="btn btn-info btn-ctrl">Reset</button>
-
+          <!--And now, by popular demand, the dreaded multiplayer mode requested by our customers  -->
+          <div class="multiplayer";
+            <form name="myForm" ng-init="multiplayer.status='One-Player Mode'" value="One-Player Mode" >
+            <label>
+              Game Mode
+              <input type="radio" ng-change="modeChange('1')" ng-model="multiplayer.status" value="One-Player Mode">
+                  Classic
+             </label>
+            <label>
+              <input type="radio" ng-change="modeChange('2')" ng-model="multiplayer.status" value="Two-Player Mode">
+                  Multiplayer
+            </label>
+            </form>
+          </div>
       </div>
 
     <h3 id="header">Infinite Loops Hangman  </h3>
@@ -73,7 +86,7 @@
         </span>
          <div id="score" class="col-xs-2">Moves Left: {{states.length-1-state}}
 		 <br>Level: {{level}}</div>
-    </div> 
+    </div>
   </div>
 </div>
 
