@@ -39,8 +39,8 @@
   border-color: firebrick;
   color: firebrick;
   text-align: center;
-	left: 40px;
-  top: 250px;
+	left: 15%;
+  top: 350px;
   font-size : 2em;
 }
 
@@ -68,7 +68,7 @@
   width:50%;
 }
 #bounty-image {
-	width:30%;
+	width:27%;
 	height:40%;
 }
 

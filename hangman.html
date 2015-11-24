@@ -19,9 +19,7 @@
 <div class="container">
   
 
-  <div id="statusbox" class="ng-class:{'hide': statusMsg == ''}">
-    <h3> {{statusMsg}} </h3>
-  </div>
+  
 <body ng-controller="hangman">
 
 <div class="container">
@@ -70,6 +68,9 @@
 			</tr>
 		 </table>
 	</div>
+	<div id="statusbox" class="ng-class:{'hide': statusMsg == ''}">
+    <h3> {{statusMsg}} </h3>
+  </div>
     <img id="hangman-image" ng-src="{{states[state]}}">
 	
 
