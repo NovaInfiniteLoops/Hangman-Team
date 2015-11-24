@@ -2,16 +2,16 @@ var dictionary = ["size","bear","tramp","rod","believe","fang","fruit","need","v
 
 
 var scrabbleScore = {'a':1,'b':3,'c':3,'d':2,'e':1,'f':4,'g':2,'h':4,'i':1,'j':8,'k':5,'l':1,'m':3,'n':1,'o':1,'p':3,'q':10,'r':1,'s':1,'t':1,'u':1,'v':4,'w':4,'x':8,'y':4,'z':10};
-function randomWordJson(mode) {
+function randomWordJson(currMode) {
 
 
    // there are two purposes to this function.
    //     1) pick a random word in the dictionary array OR if two playermode, prompt for new word from user
    //     2) convert that word into the JSON object format that we are using for
    //        the 'Hangman word';
-       if (mode=="One-Player Mode") {
+       if (currMode=="One-Player Mode") {
           word=dictionary[Math.floor((Math.random() * dictionary.length) + 1)];
-       } else if (mode=="Two-Player Mode") {
+       } else if (currMode=="Two-Player Mode") {
           word=prompt("Player one, turn your head.   Player two, enter the the word");
        } else {
           word='error';
@@ -63,9 +63,20 @@ var app = angular.module('game', ['ui.bootstrap']);
     //placeholder - when we do add database functionality, this is where we will need to populate the word from db.
     $scope.word=randomWordJson("One-Player Mode");
 
+//	$scope.mode.status = "MenuScreen";
     $scope.modeChange = function(value) {
-        $scope.resetGame();
-        console.log($scope.multiplayer.status);
+        if (value == '1') {
+			$scope.mode.status="One-Player Mode";
+		}
+		else if (value == '2') {
+			$scope.mode.status="Two-Player Mode";
+		}
+		else if (value == '0') {
+			$scope.mode.status="MenuScreen";
+		}
+		resetGame();
+		
+        console.log($scope.mode.status);
     };
 
     $scope.states = [
@@ -163,7 +174,7 @@ function randomIndexfromWord () {
     //$scope.statusMsg="Level " + $scope.level;
 	$scope.statusMsg="";
     $scope.state = 0;
-    $scope.word=randomWordJson($scope.multiplayer.status);
+    $scope.word=randomWordJson($scope.mode.status);
     $scope.alphabet = [
       {letter: "A", visible: true},
       {letter: "B", visible: true},
@@ -194,6 +205,11 @@ function randomIndexfromWord () {
     ];
 
   }
+  
+  // Wrapper function needed so that it works with timeout - AEV
+  function resetGame(){
+	  $scope.resetGame();
+  }
 
     $scope.clicked = function (idx) {
 
@@ -220,7 +236,8 @@ function randomIndexfromWord () {
       //  window.alert('Level Solved');
         $timeout(startNewLevel, 2000);
       } else if ($scope.state==($scope.states.length-1)) {
-         $scope.statusMsg = "YOU LOST.  HIT RESET!";
+         $scope.statusMsg = "YOU LOST.";
+		 $timeout(resetGame, 2000);
       }
 
 
@@ -250,7 +267,9 @@ function randomIndexfromWord () {
         startNewLevel();
       //  $window.alert("Good Job, Proceed to Next Level!");
       } else if ($scope.state==($scope.states.length-1)) {
-         $scope.statusMsg = "YOU LOST.  HIT RESET!";
+		  window.alert('You lose!');
+		  resetGame();
+         //$scope.statusMsg = "YOU LOST.  HIT RESET!";
       }
 
 
@@ -319,7 +338,7 @@ function randomIndexfromWord () {
          $scope.word[i].visible = false;
       }
 
-      $scope.word=randomWordJson($scope.multiplayer.status);
+      $scope.word=randomWordJson($scope.mode.status);
 
 
 
