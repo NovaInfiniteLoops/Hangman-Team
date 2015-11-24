@@ -7,6 +7,7 @@
     font-family:"Webdings"
 }
 #bountybox {
+  z-index: 10;
   font-size: 2em;
 	position: fixed;
   border-style: outset;
@@ -14,8 +15,8 @@
   border-color: firebrick;
   color: midnightblue;
   text-align: center;
-	left: 40px;
-  top: 40px;
+	left: 15%;
+  top: 175px;
   font-size : 2em;
 }
 
@@ -56,6 +57,15 @@
     color:firebrick;
     padding: 10px;
 }
+
+#hangman-image {
+  position: relative;
+
+  min-height: 1px;
+  padding-right: 20%;
+  padding-left: 20%;
+}
+
 .btn-info {
     background-color:white;
     border-color:firebrick;
