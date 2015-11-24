@@ -63,8 +63,19 @@ var app = angular.module('game', ['ui.bootstrap']);
     //placeholder - when we do add database functionality, this is where we will need to populate the word from db.
     $scope.word=randomWordJson("One-Player Mode");
 
+//	$scope.mode.status = "MenuScreen";
     $scope.modeChange = function(value) {
-        resetGame();
+        if (value == '1') {
+			$scope.mode.status="One-Player Mode";
+		}
+		else if (value == '2') {
+			$scope.mode.status="Two-Player Mode";
+		}
+		else if (value == '0') {
+			$scope.mode.status="MenuScreen";
+		}
+		resetGame();
+		
         console.log($scope.mode.status);
     };
 

@@ -15,7 +15,7 @@
   color: midnightblue;
   text-align: center;
 	left: 15%;
-  top: 175px;
+  top: 125px;
   font-size : 1.2em;
   width:10%;
   height:20%;
@@ -28,7 +28,6 @@
 #reset {
 	float:right;
     clear:left;
-    padding: 10px;
 }
 
 #statusbox {
@@ -40,7 +39,7 @@
   color: firebrick;
   text-align: center;
 	left: 15%;
-  top: 350px;
+  top: 300px;
   font-size : 2em;
 }
 
@@ -49,7 +48,7 @@
     color:firebrick;
     text-align:center;
 
-    margin: 0 0 0 5%;
+    margin: 0%;
     padding:5px;
 }
 #score {
@@ -153,11 +152,14 @@
 .jumbotron {
     background-color:white;
     padding:0px;
-    margin-top:30px;
+    margin-top:0px;
 }
 .row {
     padding-right:40px;
     padding-left:40px;
+}
+.main-menu{
+	text-align:center;
 }
 hr {
     background-color:midnightblue;
@@ -170,6 +172,7 @@ h1 {
     color:firebrick;
     font-size:20px;
 }
+
 table {
 	border:1px;
 	border-width:0px;
