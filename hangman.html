@@ -17,32 +17,7 @@
 </head>
 
 <div class="container">
-  <div id="bountybox">
-     <h4>${{bounty}} in Bounty Bank!</h4>
-     <div>
-     <img src="./Resources/bounty.jpg" width=60 height=75>
-   </div>
-   <div>
-     <table>
-       <tr>
-          <td>
-            $10
-          </td>
-          <td>
-            $35
-          </td>
-       </tr>
-       <tr>
-         <td>
-           <span ng-click="buyLetter()" class="btn btn-bountybox">BCD...</span>
-         </td>
-         <td>
-           <span ng-click="buyVowel()" class="btn btn-bountybox">AEI...</span>
-         </td>
-        </tr>
-     </table>
-   </div>
-  </div>
+  
 
   <div id="statusbox" class="ng-class:{'hide': statusMsg == ''}">
     <h3> {{statusMsg}} </h3>
@@ -70,7 +45,34 @@
 
     <hr>
 
-    <img class="col-xs-12" ng-src="{{states[state]}}">
+	<div id="bountybox">
+     <h4>${{bounty}} in Bounty Bank!</h4>
+     <div>
+     <img src="./Resources/bounty.jpg" width=60 height=75>
+	</div>
+	<div>
+     <table>
+       <tr>
+          <td>
+            $10
+          </td>
+          <td>
+            $35
+          </td>
+       </tr>
+       <tr>
+         <td>
+           <span ng-click="buyLetter()" class="btn btn-bountybox">BCD...</span>
+         </td>
+         <td>
+           <span ng-click="buyVowel()" class="btn btn-bountybox">AEI...</span>
+         </td>
+        </tr>
+     </table>
+	</div>
+	</div>
+    <img id="hangman-image" ng-src="{{states[state]}}">
+	
 
     <div class="results">
         <span>
