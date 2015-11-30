@@ -26,7 +26,7 @@
 	<h2 id="header">Infinite Loops Hangman</h2>
 
 
-          <!-- TODO: be able to comment this out without breaking shit -->
+          <!-- TODO: be able to comment this out without breaking other sections-->
           <div id="mode" class="ng-class:{'hide': true}">
             <form name="myForm" ng-init="mode.status='MenuScreen'" value="MenuScreen" >
             <label>Game Mode <input type="radio" ng-model="mode.status" value="MenuScreen"> Null </label><label><input type="radio" ng-change="modeChange('1')" ng-model="mode.status" value="One-Player Mode">Classic</label>  <label>  <input type="radio" ng-change="modeChange('2')" ng-model="mode.status" value="Two-Player Mode">Multiplayer</label>
@@ -35,7 +35,7 @@
           
 	<div class="main-menu ng-class:{'hide': mode.status != 'MenuScreen'}">
 		<button class="btn btn-info btn-ctrl" ng-click="modeChange('1')"> Single-Player</button>
-		<!--And now, by popular demand, the dreaded multiplayer mode requested by our customers  -->
+		<!--Multiplayer mode-->
 		<button class="btn btn-info btn-ctrl" ng-click="modeChange('2')"> Multi-Player</button>
 	
 	</div>
