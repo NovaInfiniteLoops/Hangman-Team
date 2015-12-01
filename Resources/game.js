@@ -248,7 +248,7 @@ function randomIndexfromWord () {
         $scope.statusMsg="LEVEL WON!";
 
       //  window.alert('Level Solved');
-          if ($scope.mode.status == "Two-Player Mode") 
+          if ($scope.mode.status == "Two-Player Mode") // switch players if in multiplayer
               currPlayer = 3 - currPlayer;
         $timeout(startNewLevel, 2000);
       } else if ($scope.state==($scope.states.length-1)) {
