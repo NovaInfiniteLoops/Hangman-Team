@@ -2,6 +2,9 @@ var dictionary = ["size","bear","tramp","rod","believe","fang","fruit","need","v
 
 
 var scrabbleScore = {'a':1,'b':3,'c':3,'d':2,'e':1,'f':4,'g':2,'h':4,'i':1,'j':8,'k':5,'l':1,'m':3,'n':1,'o':1,'p':3,'q':10,'r':1,'s':1,'t':1,'u':1,'v':4,'w':4,'x':8,'y':4,'z':10};
+
+var currPlayer = 1;
+
 function randomWordJson(currMode) {
 
 
@@ -12,7 +15,12 @@ function randomWordJson(currMode) {
        if (currMode=="One-Player Mode") {
           word=dictionary[Math.floor((Math.random() * dictionary.length) + 1)];
        } else if (currMode=="Two-Player Mode") {
-          word=prompt("Player one, turn your head.   Player two, enter the the word");
+           word=prompt("Player " + playerToString(currPlayer) + ", turn your head.   Player " + playerToString(3 - currPlayer) + ", enter the the word");
+           //console.log(word + ": " + dictionary.indexOf(word));
+           while (dictionary.indexOf(word) < 0)
+               word=prompt("Word was not in dictionary. Be fair!");
+                //console.log(word + ": " + dictionary.indexOf(word));
+           
        } else {
           word='error';
        }
@@ -20,10 +28,10 @@ function randomWordJson(currMode) {
        //text is a long string that we are concatenating together.
        var text='[';
        for (var i=0; i < word.length; i++) {
-         text += '{"letter": "' + word[i] +'", "visible": false}';
-         if (i != (word.length-1)) {
+           text += '{"letter": "' + word[i] +'", "visible": false}';
+           if (i != (word.length-1)) {
            text += ",";
-         }
+           }
        }
        text += ']';
 
@@ -36,6 +44,12 @@ function randomWordJson(currMode) {
        return obj;
 
   }
+    //returns the string representations for player 1 or 2
+
+    function playerToString(pNumber) {
+        if (pNumber == 1) return "one";
+        else return "two";
+    }
 
 
  //returns the total difficulty score for the word. Higher is harder.
@@ -234,6 +248,8 @@ function randomIndexfromWord () {
         $scope.statusMsg="LEVEL WON!";
 
       //  window.alert('Level Solved');
+          if ($scope.mode.status == "Two-Player Mode") 
+              currPlayer = 3 - currPlayer;
         $timeout(startNewLevel, 2000);
       } else if ($scope.state==($scope.states.length-1)) {
          $scope.statusMsg = "YOU LOST.";
@@ -327,6 +343,7 @@ function randomIndexfromWord () {
       $scope.statusMsg="";
 
       $scope.bounty=75;
+        currPlayer = 1;
 
       //reset all the alphabet tiles to visible
       for(var i = 0; i < $scope.alphabet.length; i++) {
