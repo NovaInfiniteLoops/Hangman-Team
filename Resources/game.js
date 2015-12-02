@@ -270,6 +270,10 @@ function randomIndexfromWord () {
               currPlayer = 3 - currPlayer;
         $timeout(startNewLevel, 2000);
       } else if ($scope.state==($scope.states.length-1)) {
+         for (var i = 0; i < $scope.word.length; i++) {
+             $scope.word[i].visible = true;
+         }
+             
          $scope.statusMsg = "YOU LOST.";
 		 $timeout(resetGame, 2000);
       }
