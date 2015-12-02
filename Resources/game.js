@@ -5,6 +5,11 @@ var scrabbleScore = {'a':1,'b':3,'c':3,'d':2,'e':1,'f':4,'g':2,'h':4,'i':1,'j':8
 
 var currPlayer = 1;
 
+$.get("/Resources/good-dict.txt", function(data) {
+      dictionary = data.split('\n');
+    //console.log(items);
+  });
+
 function randomWordJson(currMode) {
 
 
@@ -65,7 +70,7 @@ function getWordScore(word) {
 //Longer words are worth less. Letters with higher Scrabble scores are worth more.
 //TO-DO make the function also take into account letter frequency. Higher frequency letters should be also worth more.
 function getLetterScore(letter, w_length) {
-	return 10*scrabbleScore[letter]/Math.pow(w_length, 1.5);
+	return 10*scrabbleScore[letter.toLowerCase()]/Math.pow(w_length, 1.5);
 }
 
 //ok, next two lines are some of the most important code the game.  We are defining the anguular app and the controller.
