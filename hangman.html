@@ -84,7 +84,8 @@
           </span>
         </span>
          <div id="score" class="col-xs-2">Moves Left: {{states.length-1-state}}
-		 <br>Level: {{level}}</div>
+             <div id="leveldisplay" class="ng-class:{'hide': mode.status == 'Two-Player Mode'}">Level: {{level}}</div>
+        </div>
     </div>
   </div>
 </div>
