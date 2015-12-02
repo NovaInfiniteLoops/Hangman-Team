@@ -24,6 +24,10 @@ function randomWordJson(currMode) {
        } else if (currMode=="Two-Player Mode") {
            word=prompt("Player " + playerToString(currPlayer) + ", turn your head.   Player " + playerToString(3 - currPlayer) + ", enter the the word");
            //console.log(word + ": " + dictionary.indexOf(word));
+           if (word == null)
+           {
+               return null;
+           }
            while (dictionary.indexOf(word) < 0)
                word=prompt("Word was not in dictionary. Be fair!");
                 //console.log(word + ": " + dictionary.indexOf(word));
@@ -81,23 +85,24 @@ var app = angular.module('game', ['ui.bootstrap']);
    app.controller("hangman", ["$scope", "$timeout", function ($scope, $timeout) {
     $scope.state = 0;
 
-    //placeholder - when we do add database functionality, this is where we will need to populate the word from db.
     $scope.word=randomWordJson("One-Player Mode");
 
 //	$scope.mode.status = "MenuScreen";
     $scope.modeChange = function(value) {
         if (value == '1') {
 			$scope.mode.status="One-Player Mode";
+            resetGame();
 		}
 		else if (value == '2') {
 			$scope.mode.status="Two-Player Mode";
+            resetGame();
 		}
 		else if (value == '0') {
 			$scope.mode.status="MenuScreen";
 		}
-		resetGame();
 		
-        console.log($scope.mode.status);
+		
+        console.log("Changed mode to: " + $scope.mode.status);
     };
 
     $scope.states = [
@@ -196,6 +201,12 @@ function randomIndexfromWord () {
 	$scope.statusMsg="";
     $scope.state = 0;
     $scope.word=randomWordJson($scope.mode.status);
+      if ($scope.word == null)
+           {
+               console.log("got null word");
+               $scope.mode.status="MenuScreen";
+               return null;
+           }
     $scope.alphabet = [
       {letter: "A", visible: true},
       {letter: "B", visible: true},
@@ -286,8 +297,9 @@ function randomIndexfromWord () {
 
           if (puzzleSolved()) {
         $scope.statusMsg="LEVEL WON!";
-        window.alert('Level Solved');
-        startNewLevel();
+        //window.alert('Level Solved');
+        $timeout(startNewLevel, 2000);
+        //startNewLevel();
       //  $window.alert("Good Job, Proceed to Next Level!");
       } else if ($scope.state==($scope.states.length-1)) {
 		  window.alert('You lose!');
@@ -319,8 +331,9 @@ function randomIndexfromWord () {
 
           if (puzzleSolved()) {
         $scope.statusMsg="LEVEL WON!";
-        window.alert('Level Solved');
-        startNewLevel();
+        $timeout(startNewLevel, 2000);
+        //window.alert('Level Solved');
+        //startNewLevel();
       //  $window.alert("Good Job, Proceed to Next Level!");
       } else if ($scope.state==($scope.states.length-1)) {
          $scope.statusMsg = "YOU LOST.  HIT RESET!";
@@ -362,7 +375,16 @@ function randomIndexfromWord () {
          $scope.word[i].visible = false;
       }
 
+        
       $scope.word=randomWordJson($scope.mode.status);
+        if ($scope.word == null)
+           {
+               $scope.mode.status="MenuScreen";
+               $scope.word = ""; //ensures that future resets do not break resetgame function
+               return;
+           }
+    
+        
 
 
 
