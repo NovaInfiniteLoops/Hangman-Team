@@ -16,7 +16,7 @@ function randomWordJson(currMode) {
 
 
    // there are two purposes to this function.
-   //     1) pick a random word in the dictionary array OR if two playermode, prompt for new word from user
+   //     1) pick a random word in the dictionary OR if two playermode, prompt for new word from user
    //     2) convert that word into the JSON object format that we are using for
    //        the 'Hangman word';
        if (currMode=="One-Player Mode") {
@@ -87,7 +87,12 @@ var app = angular.module('game', ['ui.bootstrap']);
 
     $scope.word=randomWordJson("One-Player Mode");
 
-//	$scope.mode.status = "MenuScreen";
+	/**
+		Change the game mode based on a given numerical string.
+		'0' - MenuScreen
+		'1' - One-Player Mode
+		'2' - Two-Player Mode
+	*/
     $scope.modeChange = function(value) {
         if (value == '1') {
 			$scope.mode.status="One-Player Mode";
@@ -115,11 +120,12 @@ var app = angular.module('game', ['ui.bootstrap']);
       "./Resources/hangman7_dead.gif"
     ];
 
-    $scope.bounty=75;
+    $scope.bounty=75; //amount of money player has to buy letters
 
-    $scope.level=1;
+    $scope.level=1; //current game level. 
+	$scope.canPlay = true; //whether or not buttons are active
 
-    $scope.statusMsg="";
+    $scope.statusMsg=""; //a message displayed to the player when they win or lose
 
     $scope.alphabet = [
       {letter: "A", visible: true},
@@ -165,7 +171,6 @@ function puzzleSolved () {
   }
 }
 
-
 function randomIndexfromWord () {
   found=false;
   i=Math.floor((Math.random() * $scope.word.length));
@@ -180,7 +185,9 @@ function randomIndexfromWord () {
   return i;
 }
 
-
+/**
+	Returns whether or not the argument is a vowel (a/e/i/o/u)
+*/
 
   function isVowel (letter) {
     //returns true if a vowel, false if not.
@@ -193,6 +200,10 @@ function randomIndexfromWord () {
       }
    return found;
   }
+  
+  /**
+	Starts a new level 
+  */
 
   function startNewLevel() {
     $scope.bounty += 25;
@@ -200,6 +211,7 @@ function randomIndexfromWord () {
     //$scope.statusMsg="Level " + $scope.level;
 	$scope.statusMsg="";
     $scope.state = 0;
+	$scope.canPlay = true;
     $scope.word=randomWordJson($scope.mode.status);
       if ($scope.word == null)
            {
@@ -244,6 +256,8 @@ function randomIndexfromWord () {
   }
 
     $scope.clicked = function (idx) {
+		if (!$scope.canPlay)
+			return;
 
 
       if ($scope.states.length-1-$scope.state > 0 ) {
@@ -268,13 +282,16 @@ function randomIndexfromWord () {
       //  window.alert('Level Solved');
           if ($scope.mode.status == "Two-Player Mode") // switch players if in multiplayer
               currPlayer = 3 - currPlayer;
+		$scope.canPlay = false;
         $timeout(startNewLevel, 2000);
+		 //disable buttons until next level
       } else if ($scope.state==($scope.states.length-1)) {
          for (var i = 0; i < $scope.word.length; i++) {
              $scope.word[i].visible = true;
          }
              
          $scope.statusMsg = "YOU LOST.";
+		 $scope.canPlay = false; //disable buttons until next game
 		 $timeout(resetGame, 2000);
       }
 
@@ -301,12 +318,13 @@ function randomIndexfromWord () {
 
           if (puzzleSolved()) {
         $scope.statusMsg="LEVEL WON!";
-        //window.alert('Level Solved');
+        $scope.canPlay = false; //disable buttons until next level
         $timeout(startNewLevel, 2000);
-        //startNewLevel();
+		
+
       //  $window.alert("Good Job, Proceed to Next Level!");
       } else if ($scope.state==($scope.states.length-1)) {
-		  window.alert('You lose!');
+		  window.alert('You lose! Somehow!');
 		  resetGame();
          //$scope.statusMsg = "YOU LOST.  HIT RESET!";
       }
@@ -335,12 +353,14 @@ function randomIndexfromWord () {
 
           if (puzzleSolved()) {
         $scope.statusMsg="LEVEL WON!";
+		$scope.canPlay = false; //disable buttons until next level
         $timeout(startNewLevel, 2000);
         //window.alert('Level Solved');
         //startNewLevel();
       //  $window.alert("Good Job, Proceed to Next Level!");
       } else if ($scope.state==($scope.states.length-1)) {
-         $scope.statusMsg = "YOU LOST.  HIT RESET!";
+         $scope.statusMsg = "YOU LOST.  Somehow!";
+		 resetGame();
       }
 
       }
@@ -361,6 +381,7 @@ function randomIndexfromWord () {
       // the Hangman image is bound to the state variable.   If we set the state variable to 0, the
       // image will automatically update to the initial picture.  No further work needed.
       $scope.state = 0;
+	  $scope.canPlay = true;
 
       $scope.level=1;
 
